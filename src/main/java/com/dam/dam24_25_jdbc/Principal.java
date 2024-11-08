@@ -29,11 +29,15 @@ public class Principal {
 			opcion = leerTeclado(scanner);
 			switch (opcion) {
 				case 1: {
-					Conexion.insertarMySQL(asignaturas);
+					//Conexion.insertarMySQL(asignaturas);
+					Conexion.insertarBBDD(asignaturas, "com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost/asignaturas", 
+							              "root", "1234.Abcd");
 					break;
 				}
 				case 2: {
-					Conexion.insertarPostGres(asignaturas);
+					//Conexion.insertarPostGres(asignaturas);
+					Conexion.insertarBBDD(asignaturas, "org.postgresql.Driver", "jdbc:postgres://localhost/asignaturas", 
+				              "postgres", "1234.Abcd");
 					break;
 				}
 				case 0:
