@@ -23,10 +23,11 @@ public class Principal {
 		int opcion = -1;
 		
 		ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
+		Datos datos = null;
 
 		asignaturas = leerXML("D:\\PRUEBAS\\asignaturas.xml");
-		Properties props = new Properties();
-		props.load(new FileInputStream("D:\\PRUEBAS\\conexiones.properties"));
+//		Properties props = new Properties();
+//		props.load(new FileInputStream("D:\\PRUEBAS\\conexion.properties"));
 		
 		while (true) {
 			mostrarMenu();
@@ -36,16 +37,25 @@ public class Principal {
 					//Conexion.insertarMySQL(asignaturas);
 //					Conexion.insertarBBDD(asignaturas, "com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost/asignaturas", 
 //							              "root", "1234.Abcd");
-					Conexion.insertarBBDD(asignaturas, props.getProperty("driverMySQL"), props.getProperty("rutaMySQL"), 
-										 props.getProperty("usuarioMySQL"), props.getProperty("passwordMySQL"));
+					datos = LeerFichero.leerFicheroProp("D:\\PRUEBAS\\conexion.properties", "MySQL");
+					
+//					Conexion.insertarBBDD(asignaturas, props.getProperty("driverMySQL"), props.getProperty("rutaMySQL"), 
+//										 props.getProperty("usuarioMySQL"), props.getProperty("passwordMySQL"));
+					Conexion.insertarBBDD(asignaturas, datos.getRutaDriver(), datos.getRutaBBDD(), 
+  							 			  datos.getUsuario(), datos.getPassword());
 					break;
 				}
 				case 2: {
 					//Conexion.insertarPostGres(asignaturas);
 //					Conexion.insertarBBDD(asignaturas, "org.postgresql.Driver", "jdbc:postgres://localhost/asignaturas", 
 //				              "postgres", "1234.Abcd");
-					Conexion.insertarBBDD(asignaturas, props.getProperty("driverPostgres"), props.getProperty("rutaPostgres"), 
-							 props.getProperty("usuarioPostgres"), props.getProperty("passwordPostgres"));
+					datos = LeerFichero.leerFicheroProp("D:\\PRUEBAS\\conexion.properties", "Postgres");
+					
+//					Conexion.insertarBBDD(asignaturas, props.getProperty("driverPostgres"), props.getProperty("rutaPostgres"), 
+//							 props.getProperty("usuarioPostgres"), props.getProperty("passwordPostgres"));
+					Conexion.insertarBBDD(asignaturas, datos.getRutaDriver(), datos.getRutaBBDD(), 
+				 			  			  datos.getUsuario(), datos.getPassword());
+					
 					break;
 				}
 				case 0:
